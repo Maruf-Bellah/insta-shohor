@@ -12,13 +12,12 @@ const getReportedPosts = () => {
 };
 
 const isLiked = (id) => {
-    return likedPostsId?.length && !!likedPostsId.includes(id);
+    return likedPostsId.length && likedPostsId.includes(id);
+    likedPostsId.innerHTML='';
 };
 
 const addToLiked = (id) => {
-  console.log(id);
     likedPostsId.push(id); 
-    console.log(id);
     showPosts(posts);
 };
 
@@ -53,6 +52,7 @@ const switchTab = (id) => {
 };
 
 const createPost = (post) => {
+  // console.log(post.comments[0]);
     const image = post.image;
     const div = document.createElement( "article" );
     div.classList.add( "post" );
@@ -122,9 +122,9 @@ const createPost = (post) => {
                   <div class="post__description">
                     <small>
                       <a class="post__name--underline" href="#">
-                          ${post.comments?.user}
+                          ${post.comments[0].user}
                       </a>
-                      ${post.comments?.text}
+                      ${post.comments[0].text}
                     </small>
                   </div>
                   <span class="post__date-time">30 minutes ago</span>
@@ -145,7 +145,10 @@ const showPosts = (posts) => {
 };
 
 const displayLikedPosts = () => {
+  document.getElementById( "liked" ).innerHTML=" ";
     const likedPosts = getLikedPosts();
+ 
+    console.log(likedPosts[0].id);
     likedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById( "liked" ).appendChild(div);
@@ -153,17 +156,23 @@ const displayLikedPosts = () => {
 };
 
 const displayReportedPosts = () => {
+  document.getElementById( "reported" ).innerHTML=" ";
     const reportedPosts = getReportedPosts();
-    posts.forEach((post) => {
+    
+    reportedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById( "reported" ).appendChild(div);
+
     });
+  
+
 };
 
 const loadPosts = async () =>{
   let data = await fetch('../data/posts.json');
   posts = await data.json();
   showPosts(posts);
+
 }
 
 loadPosts();
