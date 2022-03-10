@@ -123,7 +123,7 @@ const createPost = (post) => {
                     <small>
                       <a class="post__name--underline" href="#">
                           ${post.comments[0].user}
-                      </a>
+                      </a><br>
                       ${post.comments[0].text}
                     </small>
                   </div>
