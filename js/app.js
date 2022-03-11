@@ -135,6 +135,7 @@ const createPost = (post) => {
 };
 
 const showPosts = (posts) => {
+ 
     const productsContainer = document.getElementById( "posts" );
     productsContainer.innerHTML = "";
 
@@ -145,6 +146,8 @@ const showPosts = (posts) => {
 };
 
 const displayLikedPosts = () => {
+  const all = document.getElementById('all');
+  all.style.display='none'
   document.getElementById( "liked" ).innerHTML=" ";
     const likedPosts = getLikedPosts();
  
@@ -156,6 +159,8 @@ const displayLikedPosts = () => {
 };
 
 const displayReportedPosts = () => {
+  const all = document.getElementById('all');
+  all.style.display='none'
   document.getElementById( "reported" ).innerHTML=" ";
     const reportedPosts = getReportedPosts();
     
